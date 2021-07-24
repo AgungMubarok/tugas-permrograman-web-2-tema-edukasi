@@ -25,6 +25,19 @@ const cekLogin = () =>{
   }
 }
 
+const detail = (event, id) => {
+  event.preventDefault();
+  localStorage.setItem('kelasID', id);
+  // if(haslogin === true){
+    window.location.replace('../detail-kelas.html');
+  // } else {
+  //   swal("Gagal", "Anda harus login terlebih dahulu!", "error")
+  //   .then(() => {
+  //     window.location.replace('../index.html')
+  //   });
+  // }
+}
+
 const classSection = async(url) => {
   let response = await fetch(url, {
     method: "GET",
@@ -38,7 +51,7 @@ const classSection = async(url) => {
       document.getElementById('kelas').innerHTML += 
       `
         <div class="card m-2" style="width: 18rem;">
-          <a href="/detail-kelas.html" style="text-decoration: none; color: black;">
+          <a onclick="detail(event, ${element.id})" style="text-decoration: none; color: black;">
             <img src=${element.urlImage} class="card-img-top" width=100 height=230 style="object-fit: cover;" alt=${element.name}>
             <div class="card-body">
               <h5 class="card-title">${element.name}</h5>
