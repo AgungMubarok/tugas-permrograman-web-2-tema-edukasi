@@ -1,6 +1,6 @@
+var haslogin = localStorage.getItem('hasLogin');
+
 const cekLogin = () =>{
-  let haslogin = localStorage.getItem('hasLogin');
-  
   if (haslogin == "true") {
     return document.getElementById('hasLog').innerHTML = 
     `
@@ -46,26 +46,27 @@ const classSection = async(url) => {
     }
   });
   let data = await response.json();
-  console.log(data.length);
-  data.slice(0, 3).map((element) => {
+  data.map((element) => {
       document.getElementById('kelas').innerHTML += 
       `
-        <div class="card m-2" style="width: 18rem;">
+      <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
           <a onclick="detail(event, ${element.id})" style="text-decoration: none; color: black;">
             <img src=${element.urlImage} class="card-img-top" width=100 height=230 style="object-fit: cover;" alt=${element.name}>
             <div class="card-body">
               <h5 class="card-title">${element.name}</h5>
-              <div class="d-flex justify-content-lg-between">
+              <div class="d-flex justify-content-between">
                 <p>Total Kelas</p>
                 <p>${element.totalPelajaran} Materi</p>
               </div>
             </div>
           </a>
         </div>
+      </div>
       `
     }
   );
-}
+};
 
 cekLogin();
 classSection("https://60f57a3218254c00176dfed0.mockapi.io/kelas");
