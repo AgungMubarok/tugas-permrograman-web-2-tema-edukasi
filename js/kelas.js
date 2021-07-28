@@ -19,8 +19,8 @@ const cekLogin = () =>{
   } else if (haslogin == "false" || haslogin ==  null){
     return document.getElementById('hasLog').innerHTML = 
     ` 
-      <a class="btn btn-success" href="#" role="button">Login</a>
-      <a class="btn btn-outline-success" href="#" role="button">Daftar</a>
+      <a class="btn btn-success" href="login.html" role="button">Login</a>
+      <a class="btn btn-outline-success" href="registrasi.html" role="button">Daftar</a>
     `
   }
 }
