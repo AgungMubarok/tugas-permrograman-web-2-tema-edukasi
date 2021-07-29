@@ -1,6 +1,7 @@
+var nama = localStorage.getItem('nama');
+var haslogin = localStorage.getItem('hasLogin');
+
 const cekLogin = () =>{
-  let haslogin = localStorage.getItem('hasLogin');
-  
   if (haslogin == "true") {
     return document.getElementById('hasLog').innerHTML = 
     `
@@ -10,8 +11,8 @@ const cekLogin = () =>{
             <img src="/asset/icons/icon-user.svg" />
           </a>
           <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuButton1">
-            <li><span class="dropdown-item">Nama Lengkap</span></li>
-            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+            <li><span class="dropdown-item">${nama}</span></li>
+            <li><a class="dropdown-item text-danger" href="logout.html">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -20,22 +21,23 @@ const cekLogin = () =>{
     return document.getElementById('hasLog').innerHTML = 
     ` 
       <a class="btn btn-success" href="login.html" role="button">Login</a>
-      <a class="btn btn-outline-success" href="registrasi.html" role="button">Daftar</a>
+      <a class="btn btn-outline-success" href="register.html" role="button">Daftar</a>
     `
   }
 }
 
 const detail = (event, id) => {
   event.preventDefault();
-  localStorage.setItem('kelasID', id);
-  // if(haslogin === true){
+  if(haslogin == "true"){
+    localStorage.setItem('kelasID', id);
+    localStorage.setItem('listVideo', 1)
     window.location.replace('../detail-kelas.html');
-  // } else {
-  //   swal("Gagal", "Anda harus login terlebih dahulu!", "error")
-  //   .then(() => {
-  //     window.location.replace('../index.html')
-  //   });
-  // }
+  } else {
+    swal("Gagal", "Anda harus login terlebih dahulu!", "error")
+    .then(() => {
+      window.location.replace('../login.html')
+    });
+  }
 }
 
 const classSection = async(url) => {
@@ -46,7 +48,6 @@ const classSection = async(url) => {
     }
   });
   let data = await response.json();
-  console.log(data.length);
   data.slice(0, 3).map((element) => {
       document.getElementById('kelas').innerHTML += 
       `
